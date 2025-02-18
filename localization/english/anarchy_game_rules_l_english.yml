@@ -1,27 +1,5 @@
 ﻿l_english:
-	game_concept_anarchy:0 "Anarchy"
-	game_concept_anarchy_desc: "[anarchy|E] is a state of lawlessness and disorder. It can arise when the [control|E] of a [county|E] is low.\n\nWhen a [county|E] descends into [anarchy|E], it will be unable to collect taxes or raise levies.\n\n[anarchy|E] spawns a new leader. This leader can be a [bandit_leader|E], a [syndicate_leader|E], an [activist|E] or a [great_leader|E]."
-
-	game_concept_bandit_leader:0 "Bandit Leader"
-	game_concept_bandit_leaders:0 "Bandit Leaders"
-	game_concept_bandit_leader_desc: "A [bandit_leader|E] is a type of [ruler|E] that comes to power when a [county|E] descends into [anarchy|E]. They are hostile to all other [counties|E] and will raid them for loot.\n\n[bandit_leaders|E] will keep their realm in a state of [anarchy|E] until they are defeated by another [ruler|E]."
-
-	game_concept_syndicate_leader:0 "Syndicate Leader"
-	game_concept_syndicate_leaders:0 "Syndicate Leaders"
-	game_concept_syndicate_leader_desc: "A [syndicate_leader|E] is a type of [ruler|E] that comes to power when a [county|E] descends into [anarchy|E]. They are hostile to all other [counties|E] and will raid them for loot.\n\n[syndicate_leaders|E] will lead their [realm|E] out of [anarchy|E] and adopt their [liege_possessive|E] government type after a while."
-
-	game_concept_activist:0 "Local leader"
-	game_concept_activists:0 "Local leaders"
-	game_concept_activist_desc: "An [activist|E] is a type of [ruler|E] that comes to power when a [county|E] descends into [anarchy|E]. They try to get their [realm|E] out of [anarchy|E] and adopt a government type that is more in line with their [liege_possessive|E] government type.\n\n There is a chance they will create a [theocracy|E] or a [republic|E], even when their [liege|E] has a [feudal|E] or [clan|E] government."
-
-	game_concept_great_leader:0 "Great Leader"
-	game_concept_great_leaders:0 "Great Leaders"
-	game_concept_great_leader_desc: "A [great_leader|E] is a type of [ruler|E] that comes to power when a [county|E] descends into [anarchy|E].\n\nThey are more aggressive and more competent [activists|E]. There is a chance for a [great_leader|E] to become a [scourge|E]."
-
-	game_concept_scourge:0 "Rebellious Scourge of the Gods"
-	game_concept_scourge_desc:	"A [scourge|E] is a type of [ruler|E] that comes to power when a [county|E] descends into [anarchy|E]. They are the ultimate [great_leaders|E]."
-
-	rule_anarchy_toggle: "[anarchy|E]"
+	rule_anarchy_toggle:0 "[anarchy|E]"
 	setting_anarchy_toggle_rule_off: "Disabled"
 	setting_anarchy_toggle_rule_off_desc: "Low [control|E] cannot cause the rise of [anarchy|E]."
 	setting_anarchy_toggle_rule_on: "Enabled"

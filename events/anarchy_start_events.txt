@@ -12,6 +12,7 @@ anarchy_start.0001 = {
     #hidden = yes
 
     immediate = {
+        add_gold = 1
         #save_scope_as = root
         every_directly_owned_province = {
             if = {
@@ -81,6 +82,9 @@ anarchy_start.0001 = {
 
 anarchy_start.1111 = {
     # New leader is a minor bandit
+    title = anarchy_start.1111.t
+    desc = anarchy_start.1111.desc
+
     immediate = {
         scope:selected_county = {
             create_title_and_vassal_change = {

@@ -12,7 +12,7 @@ dev_anarchy.0001 = {
 	option = {
 		name = dev_anarchy.0001.b
 
-		province:52 = {
+		province:496 = {
 			county = {
 				change_county_control = -1
 			}
