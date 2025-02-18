@@ -1,0 +1,82 @@
+integrate_anarchy_casus_belli = {
+	group = anarchy
+	#icon = 
+
+	cost = {
+
+	}
+
+	mutually_exclusive_titles = no
+
+	attacker_capital_gives_war_score = yes
+	defender_capital_gives_war_score = yes
+	imprisonment_by_attacker_give_war_score = no
+	imprisonment_by_defender_give_war_score = yes
+
+	on_declaration = {
+	}
+	on_victory = {
+		show_as_tooltip = {
+		# attacker gains the title
+			create_title_and_vassal_change = {
+				type = conquest
+				save_scope_as = change
+				add_claim_on_loss = yes
+			}
+
+			change_title_holder = {
+				holder = scope:attacker
+				change = scope:change
+			}
+
+			resolve_title_and_vassal_change = scope:change
+		}
+	}
+	on_white_peace = {
+		# 
+	}
+	on_defeat = {
+	}
+	on_invalidated = {
+	}
+
+	combine_into_one = yes
+
+	allowed_against_character = yes
+
+	#allowed_against_character = {
+	#	scope:defender = {
+	#		has_government = anarchy_government
+	#	}
+	#}
+
+	target_titles = all
+
+	on_primary_attacker_death = inherit
+	on_primary_defender_death = inherit
+	transfer_behavior = transfer
+	attacker_allies_inherit = no
+	defender_allies_inherit = no
+
+	interface_priority = 1
+	max_ai_diplo_distance_to_title = 1000
+
+	ai_only_against_liege = no
+	ai_only_against_neighbors = yes
+	ai_can_target_all_titles = no
+
+	ai = no
+
+	white_peace_possible = no
+	check_all_defenders_for_ticking_war_score = no
+	ticking_war_score_targets_entire_realm = no
+
+	gui_attacker_faith_might_join = no
+	defender_faith_can_join = no
+	is_great_holy_war = no
+	target_top_liege_if_outside_realm = no
+
+	should_check_for_interface_availability = yes
+
+
+}

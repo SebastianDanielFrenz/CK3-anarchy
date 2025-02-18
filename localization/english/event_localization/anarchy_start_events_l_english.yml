@@ -1,4 +1,4 @@
 ﻿l_english:
-	anarchy_start.1111.t:0 "Anarchy Arises"
-	anarchy_start.1111.desc:0 "In the absence of working governance, public order in the [selected_county.GetName] has been on decline for some time. Now, the situation has reached a breaking point. The people have taken to the streets, and the government has lost control.\n\nAmong the chaos, [leader.GetName], a leader of a minor group of bandits, has taken a shaky hold over [selected_county.GetName]. They promise to restore order, but at what cost?"
+	anarchy_start.1111.t:0 "Anarchy Arises: Bandit lord"
+	anarchy_start.1111.desc:0 "In the absence of working governance, public order in the [selected_county.GetName] has been on decline for some time. Now, the situation has reached a breaking point. The people have taken to the streets, and the government has lost control. Bandits have taken their place, pillaging nobles and commoners alike. Nothing is spared from the uncontained violence.\n\nAmong the chaos, [leader.GetName], a leader of a minor group of bandits, has taken a shaky hold over [selected_county.GetName]. They promise to restore order, but at what cost?"
 	anarchy_start.1111.a:0 "Damn this [leader.GetFirstName]!"

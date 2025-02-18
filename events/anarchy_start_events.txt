@@ -9,10 +9,9 @@ namespace = anarchy_start
 # 13XX - Leader is a great leader
 
 anarchy_start.0001 = {
-    #hidden = yes
+    hidden = yes
 
     immediate = {
-        add_gold = 1
         #save_scope_as = root
         every_directly_owned_province = {
             if = {
@@ -75,9 +74,9 @@ anarchy_start.0001 = {
         }
     }
 
-    option = {
-        name = anarchy_start.0001.a
-    }
+    #option = {
+    #    name = anarchy_start.0001.a
+    #}
 }
 
 anarchy_start.1111 = {
@@ -110,7 +109,8 @@ anarchy_start.1111 = {
     left_portrait = scope:leader
     right_portrait = {
         character = scope:original_owner
-        animation = anger
+        #animation = anger
+        animation = war_over_loss
     }
 
     option = {
