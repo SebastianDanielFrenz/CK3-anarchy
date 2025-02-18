@@ -1,0 +1,9 @@
+anarchy_decision_create = {
+    effect = {
+        #province:1000 = {
+        #    
+        #}
+
+        change_government = anarchy_government
+    }
+}

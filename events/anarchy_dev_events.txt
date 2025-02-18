@@ -1,0 +1,21 @@
+namespace = dev_anarchy
+
+dev_anarchy.0001 = {
+	left_portrait = root
+
+	option = {
+		name = dev_anarchy.0001.a
+
+		add_gold = 1
+	}
+
+	option = {
+		name = dev_anarchy.0001.b
+
+		province:52 = {
+			county = {
+				change_county_control = -1
+			}
+		}
+	}
+}

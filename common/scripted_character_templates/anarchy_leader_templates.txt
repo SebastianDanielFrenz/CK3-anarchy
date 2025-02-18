@@ -1,0 +1,196 @@
+anarchy_criminal_bandit = {
+	gender_female_chance = 0.05
+	faith = root.location.faith
+	culture = root.location.culture
+	dynasty = none
+	age = { 18 45 }
+
+	trait = gallowsbait
+	diplomacy = { min_template_low_skill max_template_low_skill }
+	martial = { min_template_high_skill max_template_high_skill }
+	stewardship = { min_template_low_skill max_template_low_skill }
+	intrigue = { min_template_low_skill max_template_high_skill }
+	learning = { min_template_low_skill max_template_decent_skill }
+	prowess = { min_template_high_skill max_template_high_skill }
+
+	random_traits_list = {
+		count = 1
+		education_martial_2 = {}
+		education_martial_3 = {}
+		education_martial_4 = {}
+		education_stewardship_3 = {}
+	}
+
+	after_creation = {
+		laamp_rewards_apply_criminal_xp_effect = {
+			TRACK = bandit
+			XP_MAX = gallowsbait_xp_massive_gain
+			XP_MIN = gallowsbait_xp_massive_gain
+		}
+	}
+}
+
+anarchy_criminal_syndicate = {
+	gender_female_chance = 0.05
+	faith = root.location.faith
+	culture = root.location.culture
+	dynasty = none
+	age = { 18 45 }
+
+	trait = gallowsbait
+	random_traits_list = {
+		intellect_good_1 = {}
+		intellect_good_2 = {}
+	}
+
+	diplomacy = { min_template_decent_skill max_template_low_skill }
+	martial = { min_template_high_skill max_template_high_skill }
+	stewardship = { min_template_decent_skill max_template_low_skill }
+	intrigue = { min_template_decent_skill max_template_high_skill }
+	learning = { min_template_low_skill max_template_decent_skill }
+	prowess = { min_template_high_skill 30 }
+
+	after_creation = {
+		random_list = {
+			pick = 3
+			unique = yes
+			100 = {
+				laamp_rewards_apply_criminal_xp_effect = {
+					TRACK = bandit
+					XP_MAX = gallowsbait_xp_massive_gain
+					XP_MIN = gallowsbait_xp_massive_gain
+				}
+			}
+			100 = {
+				laamp_rewards_apply_criminal_xp_effect = {
+					TRACK = trickster
+					XP_MAX = gallowsbait_xp_massive_gain
+					XP_MIN = gallowsbait_xp_massive_gain
+				}
+			}
+			100 = {
+				laamp_rewards_apply_criminal_xp_effect = {
+					TRACK = thief
+					XP_MAX = gallowsbait_xp_massive_gain
+					XP_MIN = gallowsbait_xp_massive_gain
+				}
+			}
+			100 = {
+				laamp_rewards_apply_criminal_xp_effect = {
+					TRACK = poacher
+					XP_MAX = gallowsbait_xp_massive_gain
+					XP_MIN = gallowsbait_xp_massive_gain
+				}
+			}
+			100 = {
+				laamp_rewards_apply_criminal_xp_effect = {
+					TRACK = marauder
+					XP_MAX = gallowsbait_xp_massive_gain
+					XP_MIN = gallowsbait_xp_massive_gain
+				}
+			}
+		}
+	}
+}
+
+anarchy_activist_peasent = {
+	gender_female_chance = 0.05
+	faith = root.location.faith
+	culture = root.location.culture
+	dynasty = none
+	age = { 14 45 }
+
+	diplomacy = { min_template_low_skill max_template_low_skill }
+	martial = { min_template_low_skill max_template_low_skill }
+	stewardship = { min_template_low_skill max_template_low_skill }
+	intrigue = { min_template_low_skill max_template_low_skill }
+	learning = { min_template_low_skill max_template_low_skill }
+	prowess = { min_template_low_skill max_template_low_skill }
+
+	random_traits_list = {
+		education_learning_1 = {}
+		education_learning_2 = {}
+		education_stewardship_1 = {}
+		education_stewardship_2 = {}
+	}
+	random_traits_list = {
+		intellect_good_1 = {}
+		intellect_good_2 = {}
+	}
+}
+
+anarchy_activist_merchant = {
+	gender_female_chance = 0.2
+	faith = root.location.faith
+	culture = root.location.culture
+	dynasty = none
+	age = { 16 25 }
+	
+	random_traits_list = {
+		intellect_good_1 = {}
+		intellect_good_2 = {}
+		intellect_good_3 = {}
+	}
+
+	diplomacy = { min_template_high_skill max_template_high_skill }
+	martial = { min_template_low_skill max_template_low_skill }
+	stewardship = { min_template_high_skill max_template_high_skill }
+	intrigue = { min_template_low_skill max_template_low_skill }
+	learning = { min_template_high_skill min_template_high_skill }
+	prowess = { min_template_low_skill max_template_low_skill }
+
+	random_traits_list = {
+		education_stewardship_2 = {}
+		education_stewardship_3 = {}
+		education_stewardship_4 = {}
+		education_stewardship_5 = {}
+	}
+}
+
+anarchy_great_leader = {
+	gender_female_chance = 0.5
+	faith = root.location.faith
+	culture = root.location.culture
+	dynasty = none
+	age = { 16 20 }
+
+	trait = intellect_good_3
+	trait = anarchy_great_leader
+	
+	diplomacy = { min_template_high_skill max_template_high_skill }
+	martial = { min_template_high_skill max_template_high_skill }
+	stewardship = { min_template_high_skill max_template_high_skill }
+	intrigue = { min_template_high_skill max_template_high_skill }
+	learning = { min_template_high_skill max_template_high_skill }
+	prowess = { min_template_high_skill max_template_high_skill }
+
+	random_traits_list = {
+		education_martial_5 = {}
+		education_stewardship_5 = {}
+		education_learning_5 = {}
+	}
+}
+
+anarchy_scurge = {
+	gender_female_chance = 0.5
+	faith = root.location.faith
+	culture = root.location.culture
+	dynasty = none
+	age = { 16 20 }
+
+	trait = intellect_good_3
+	trait = anarchy_scurge
+	
+	diplomacy = { min_template_high_skill max_template_high_skill }
+	martial = { min_template_high_skill max_template_high_skill }
+	stewardship = { min_template_high_skill max_template_high_skill }
+	intrigue = { min_template_high_skill max_template_high_skill }
+	learning = { min_template_high_skill max_template_high_skill }
+	prowess = { min_template_high_skill max_template_high_skill }
+
+	random_traits_list = {
+		education_martial_5 = {}
+		education_stewardship_5 = {}
+		education_learning_5 = {}
+	}
+}

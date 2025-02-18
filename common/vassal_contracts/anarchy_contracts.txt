@@ -1,0 +1,16 @@
+anarchy_contract = {
+    uses_opinion_of_liege = no
+
+    display_mode = radiobutton
+
+    obligation_levels = {
+        vassal_obligation_main = {
+            levies = 0
+            tax = 0
+            min_levies = 0
+            min_tax = 0
+
+            vassal_opinion = -50
+        }
+    }
+}

@@ -1,0 +1,86 @@
+anarchy_rounte_on_action = {
+	effect = {
+		every_directly_owned_province = {
+            if = {
+                limit = {
+                    is_capital_barony = yes
+                    county.county_control < 25
+                }
+
+                random_list = {
+                    9 = {}
+                    1 = {
+                        county = {
+                            save_scope_as = selected_county
+        
+                            holder = {
+                                if = {
+                                    limit = {
+                                        NOT = {
+                                            has_government = anarchy_government
+                                        }
+                                    }
+                                    
+                                    save_scope_as = original_owner
+                
+                                    random_list = {
+                                        pick = 1
+                                        unique = yes
+                                        1000 = {
+                                            create_character = {
+                                                template = anarchy_criminal_bandit
+                                                save_scope_as = leader
+                                            }
+                                            trigger_event = anarchy_start.1111
+                                        }
+                                        250 = {
+                                            create_character = {
+                                                template = anarchy_criminal_syndicate
+                                                save_scope_as = leader
+                                            }
+                                            trigger_event = anarchy_start.1121
+                                        }
+                                        500 = {
+                                            create_character = {
+                                                template = anarchy_activist_peasent
+                                                save_scope_as = leader
+                                            }
+                                            trigger_event = anarchy_start.1211
+                                        }
+                                        250 = {
+                                            create_character = {
+                                                template = anarchy_activist_merchant
+                                                save_scope_as = leader
+                                            }
+                                            trigger_event = anarchy_start.1221
+                                        }
+                                        10 = {
+                                            create_character = {
+                                                template = anarchy_great_leader
+                                                save_scope_as = leader
+                                            }
+                                            trigger_event = anarchy_start.1311
+                                        }
+                                        1 = {
+                                            create_character = {
+                                                template = anarchy_scurge
+                                                save_scope_as = leader
+                                            }
+                                            trigger_event = anarchy_start.1321
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }                               
+            }
+        }
+	}
+}
+
+random_yearly_playable_pulse = {
+	on_actions = {
+		anarchy_rounte_on_action
+	}
+}
