@@ -1,0 +1,35 @@
+anarchy_toggle = {
+	default = anarchy_toggle_rule_off
+
+	anarchy_toggle_rule_off = {}
+	anarchy_toggle_rule_on = {}
+}
+
+anarchy_chance = {
+	default = anarchy_chance_rule_10
+
+	# chance of anarchy being triggered when control is below threshold
+	# for every check (once a year)
+
+	anarchy_chance_rule_1 = {}
+	anarchy_chance_rule_3 = {}
+	anarchy_chance_rule_5 = {}
+	anarchy_chance_rule_10 = {}
+	anarchy_chance_rule_25 = {}
+	anarchy_chance_rule_100 = {}
+}
+
+anarchy_threshold = {
+	default = anarchy_threshold_rule_30
+
+	# if control below this threshold, anarchy can be triggered
+
+	anarchy_threshold_rule_20 = {}
+	anarchy_threshold_rule_30 = {}
+	anarchy_threshold_rule_40 = {}
+	anarchy_threshold_rule_50 = {}
+	anarchy_threshold_rule_60 = {}
+	anarchy_threshold_rule_70 = {}
+	anarchy_threshold_rule_80 = {}
+	anarchy_threshold_rule_90 = {}
+}

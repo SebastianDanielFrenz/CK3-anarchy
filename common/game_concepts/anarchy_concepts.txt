@@ -1,0 +1,3 @@
+anarchy = {
+	texture = "gfx/interface/icons/faction_type/peasant_faction.dds"
+}
