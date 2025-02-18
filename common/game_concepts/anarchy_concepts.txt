@@ -1,3 +1,27 @@
 anarchy = {
 	texture = "gfx/interface/icons/faction_type/peasant_faction.dds"
 }
+
+bandit_leader = {
+	alias = { bandit_leaders }
+	texture = "gfx/interface/icons/traits/gallowsbait.dds"
+}
+
+syndicate_leader = {
+	alias = { syndicate_leaders }
+	texture = "gfx/interface/icons/traits/gallowsbait.dds"
+}
+
+activist = {
+	alias = { activists }
+	texture = "gfx/interface/icons/traits/populist_leader.dds"
+}
+
+great_leader = {
+	alias = { great_leaders }
+	texture = "gfx/interface/icons/traits/savior.dds"
+}
+
+scourge = {
+	texture = "gfx/interface/icons/traits/savior.dds"
+}
