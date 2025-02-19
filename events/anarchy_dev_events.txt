@@ -14,7 +14,7 @@ dev_anarchy.0001 = {
 
 		province:52 = {
 			county = {
-				change_county_control = -1
+				change_county_control = -10
 			}
 		}
 	}
@@ -33,5 +33,17 @@ dev_anarchy.0001 = {
 		name = dev_anarchy.0001.d
 
 		anarchy_end_into_tribal_effect = yes
+	}
+
+	option = {
+		name = "Anarchy check character effect"
+
+        anarchy_check_character_effect = yes
+	}
+
+	option = {
+		name = "Anarchy complementary chance value as gold"
+
+		add_gold = global_var:anarchy_arise_chance_complementary
 	}
 }
