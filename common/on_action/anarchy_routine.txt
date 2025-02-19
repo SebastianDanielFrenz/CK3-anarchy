@@ -1,14 +1,51 @@
 anarchy_rounte_on_action = {
 	effect = {
+        # save government type to scope value
+        save_scope_value_as = {
+            name = previous_gov_type
+            value = {
+                value = government_class_feudal_numeric # must be 0
+                if = {
+                    limit = {
+                        government_has_flag = government_is_tribal
+                    }
+                    add = government_class_tribal_numeric
+                }
+                if = {
+                    limit = {
+                        government_has_flag = government_is_clan
+                    }
+                    add = government_class_clan_numeric
+                }
+                if = {
+                    limit = {
+                        government_has_flag = government_is_administrative
+                    }
+                    add = government_class_administrative_numeric
+                }
+                if = {
+                    limit = {
+                        government_has_flag = government_is_republic
+                    }
+                    add = government_class_republic_numeric
+                }
+                if = {
+                    limit = {
+                        government_has_flag = government_is_theocracy
+                    }
+                    add = government_class_theocracy_numeric
+                }
+            }
+        }
 		every_directly_owned_province = {
             if = {
                 limit = {
                     is_capital_barony = yes
-                    county.county_control < 25
+                    county.county_control < 50
                 }
 
                 random_list = {
-                    9 = {}
+                    0 = {}
                     1 = {
                         county = {
                             save_scope_as = selected_county

@@ -1,0 +1,44 @@
+# anarchy_end_into type effects have:
+# scope:leader
+
+anarchy_end_control_effect = {
+	every_realm_county = {
+		change_county_control = 100
+	}
+}
+
+anarchy_end_into_feudal_effect = {
+	add_gold = anarchy_end_into_feudal_gold_gain
+	change_government = feudal_government
+	anarchy_end_control_effect = yes
+}
+
+anarchy_end_into_administrative_effect = {
+	add_gold = anarchy_end_into_administrative_gold_gain
+	change_government = administrative_government
+	anarchy_end_control_effect = yes
+}
+
+anarchy_end_into_clan_effect = {
+	add_gold = anarchy_end_into_clan_gold_gain
+	change_government = clan_government
+	anarchy_end_control_effect = yes
+}
+
+anarchy_end_into_republic_effect = {
+	add_gold = anarchy_end_into_republic_gold_gain
+	change_government = republic_government
+	anarchy_end_control_effect = yes
+}
+
+anarchy_end_into_theocracy_effect = {
+	add_piety = anarchy_end_into_theocracy_piety_gain
+	change_government = theocracy_government
+	anarchy_end_control_effect = yes
+}
+
+anarchy_end_into_tribal_effect = {
+	add_prestige = anarchy_end_into_tribal_prestige_gain
+	change_government = tribal_government
+	anarchy_end_control_effect = yes
+}

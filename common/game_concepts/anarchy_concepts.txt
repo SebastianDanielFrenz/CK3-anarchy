@@ -25,3 +25,7 @@ great_leader = {
 scourge = {
 	texture = "gfx/interface/icons/traits/savior.dds"
 }
+
+reintegration_war = {
+	texture = "gfx/interface/icons/faction_type/peasant_faction.dds"
+}

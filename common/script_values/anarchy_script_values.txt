@@ -1,0 +1,41 @@
+# values for scripting
+government_class_feudal_numeric = {
+	value = 0
+}
+government_class_tribal_numeric = {
+	value = 1
+}
+government_class_clan_numeric = {
+	value = 2
+}
+government_class_administrative_numeric = {
+	value = 3
+}
+government_class_republic_numeric = {
+	value = 4
+}
+government_class_theocracy_numeric = {
+	value = 5
+}
+
+
+
+# values for gameplay balance
+anarchy_end_into_tribal_prestige_gain = {
+	value = 5000
+}
+anarchy_end_into_theocracy_piety_gain = {
+	value = 5000
+}
+anarchy_end_into_republic_gold_gain = {
+	value = 200
+}
+anarchy_end_into_clan_gold_gain = {
+	value = 200
+}
+anarchy_end_into_administrative_gold_gain = {
+	value = 200
+}
+anarchy_end_into_feudal_gold_gain = {
+	value = 200
+}

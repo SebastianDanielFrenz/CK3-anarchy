@@ -18,4 +18,20 @@ dev_anarchy.0001 = {
 			}
 		}
 	}
+	option = {
+		name = dev_anarchy.0001.c
+
+		character:163115 = {
+			start_war = {
+				cb = reintegrate_anarchy_casus_belli
+				target = character:al-farghani_1
+				target_title = title:d_cyrenaica
+			}
+		}
+	}
+	option = {
+		name = dev_anarchy.0001.d
+
+		anarchy_end_into_tribal_effect = yes
+	}
 }

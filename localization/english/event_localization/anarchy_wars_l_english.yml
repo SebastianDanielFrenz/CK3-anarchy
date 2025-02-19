@@ -1,0 +1,3 @@
+﻿l_english:
+	REINTEGRATE_ANARCHY_WAR_NAME:0 "[reintegration_war|E] for the [TITLE.GetBaseName]"
+	REINTEGRATE_ANARCHY_CB_NAME:0 "[reintegration_war|E] for [county|E]"

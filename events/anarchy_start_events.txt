@@ -8,6 +8,12 @@ namespace = anarchy_start
 # 12XX - Leader is an activist
 # 13XX - Leader is a great leader
 
+# Generally available scopes in the event chain
+# scope:original_owner - the original owner of the county
+# scope:selected_county - the county that is the target of the event
+# scope:leader - the new leader of the county
+# scope:previous_gov_type - the previous government type of the leader as a numeric value
+
 anarchy_start.0001 = {
     hidden = yes
 
@@ -102,6 +108,7 @@ anarchy_start.1111 = {
 
             scope:leader = {
                 change_government = anarchy_government
+                trigger_event = anarchy_start.1180
             }
         }
     }
@@ -115,6 +122,12 @@ anarchy_start.1111 = {
 
     option = {
         name = anarchy_start.1111.a
+
+        start_war = {
+            cb = reintegrate_anarchy_casus_belli
+            target = scope:leader
+            target_title = scope:selected_county
+        }
     }
 }
 
@@ -138,6 +151,7 @@ anarchy_start.1121 = {
 
             scope:leader = {
                 change_government = anarchy_government
+                trigger_event = anarchy_start.1180
             }
         }
     }
@@ -150,6 +164,97 @@ anarchy_start.1121 = {
 
     option = {
         name = anarchy_start.1121.a
+
+        start_war = {
+            cb = reintegrate_anarchy_casus_belli
+            target = scope:leader
+            target_title = scope:selected_county
+        }
+    }
+}
+
+anarchy_start.1180 = {
+    # Criminal type anarchy - government type change event chain
+    # root: anarchy leader
+    hidden = yes
+
+    immediate = {
+        random_list = {
+            1 = {
+                trigger_event = {
+                    id = anarchy_start.1181
+                    days = { 30 59 }
+                }
+            }
+            5 = {
+                # chance of looping this event
+                trigger_event = {
+                    id = anarchy_start.1180
+                    days = 30 
+                }
+            }
+        }
+    }
+}
+
+anarchy_start.1181 = {
+    # Criminal type anarchy - government change happens
+
+    immediate = {
+        scope:leader = {
+            if = {
+                limit = {
+                    capital_barony = {
+                        OR = {
+                            has_holding_type = tribal_holding
+                        }
+                    }
+                }
+                anarchy_end_into_tribal_effect = yes
+            }
+            else = {
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_feudal_numeric
+                    }
+                    anarchy_end_into_feudal_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_tribal_numeric
+                    }
+                    anarchy_end_into_tribal_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_clan_numeric
+                    }
+                    anarchy_end_into_clan_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_administrative_numeric
+                    }
+                    anarchy_end_into_administrative_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_republic_numeric
+                    }
+                    anarchy_end_into_republic_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_theocracy_numeric
+                    }
+                    anarchy_end_into_theocracy_effect = yes
+                }
+            }
+        }
+    }
+
+    option = {
+        name = anarchy_start.1181.a
     }
 }
 
@@ -173,8 +278,11 @@ anarchy_start.1211 = {
 
             scope:leader = {
                 change_government = anarchy_government
+                trigger_event = anarchy_start.1280
             }
         }
+
+        # random chance to seek co-existance
     }
 
     left_portrait = scope:leader
@@ -185,6 +293,12 @@ anarchy_start.1211 = {
 
     option = {
         name = anarchy_start.1211.a
+
+        start_war = {
+            cb = reintegrate_anarchy_casus_belli
+            target = scope:leader
+            target_title = scope:selected_county
+        }
     }
 }
 
@@ -208,10 +322,13 @@ anarchy_start.1221 = {
 
             scope:leader = {
                 change_government = anarchy_government
+                trigger_event = anarchy_start.1280
 
                 add_long_term_gold = 200
             }
         }
+
+        # random chance to seek co-existance
     }
 
     left_portrait = scope:leader
@@ -222,6 +339,120 @@ anarchy_start.1221 = {
 
     option = {
         name = anarchy_start.1221.a
+
+        start_war = {
+            cb = reintegrate_anarchy_casus_belli
+            target = scope:leader
+            target_title = scope:selected_county
+        }
+    }
+}
+
+anarchy_start.1280 = {
+    # Activist type anarchy - government type change event chain
+    # root: anarchy leader
+    hidden = yes
+
+    immediate = {
+        random_list = {
+            1 = {
+                trigger_event = {
+                    id = anarchy_start.1281
+                    days = { 30 59 }
+                }
+            }
+            2 = {
+                # chance of looping this event
+                trigger_event = {
+                    id = anarchy_start.1280
+                    days = 30 
+                }
+            }
+        }
+    }
+}
+
+anarchy_start.1281 = {
+    # Activist type anarchy - government change happens
+
+    immediate = {
+        scope:leader = {
+            if = {
+                limit = {
+                    capital_barony = {
+                        OR = {
+                            has_holding_type = tribal_holding
+                        }
+                    }
+                }
+                anarchy_end_into_tribal_effect = yes
+            }
+            else = {
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_feudal_numeric
+                    }
+                    # feudal or republic
+                    random_list = {
+                        1 = {
+                            anarchy_end_into_feudal_effect = yes
+                        }
+                        1 = {
+                            anarchy_end_into_republic_effect = yes
+                        }
+                    }
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_tribal_numeric
+                    }
+                    anarchy_end_into_tribal_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_clan_numeric
+                    }
+                    # clan or republic
+                    random_list = {
+                        1 = {
+                            anarchy_end_into_clan_effect = yes
+                        }
+                        1 = {
+                            anarchy_end_into_republic_effect = yes
+                        }
+                    }
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_administrative_numeric
+                    }
+                    anarchy_end_into_administrative_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_republic_numeric
+                    }
+                    anarchy_end_into_republic_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_theocracy_numeric
+                    }
+                    random_list = {
+                        1 = {
+                            anarchy_end_into_theocracy_effect = yes
+                        }
+                        1 = {
+                            anarchy_end_into_republic_effect = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = anarchy_start.1281.a
     }
 }
 
@@ -245,11 +476,7 @@ anarchy_start.1311 = {
 
             scope:leader = {
                 change_government = anarchy_government
-
-                trigger_event = {
-                    id = anarchy_start.1312
-                    days = { 30 60 }
-                }
+                trigger_event = anarchy_start.1380
             }
         }
         every_player = {
@@ -273,40 +500,11 @@ anarchy_start.1311 = {
 
     option = {
         name = anarchy_start.1311.a
-    }
-}
 
-anarchy_start.1312 = {
-    # Great leader government change event
-    hidden = yes
-
-    immediate = {
-        scope:leader = {
-            if = {
-                limit = {
-                    capital_barony = {
-                        OR = {
-                            has_holding_type = tribal_holding
-                        }
-                    }
-                }
-                change_government = tribal_government
-                add_prestige = 5000
-            }
-            else = {
-                random_list = {
-                    1 = {
-                        change_government = feudal_government
-                    }
-                    1 = {
-                        change_government = republic_government
-                    }
-                    1 = {
-                        change_government = theocracy_government
-                        add_piety = 5000
-                    }
-                }
-            }
+        start_war = {
+            cb = reintegrate_anarchy_casus_belli
+            target = scope:leader
+            target_title = scope:selected_county
         }
     }
 }
@@ -358,6 +556,12 @@ anarchy_start.1321 = {
 
     option = {
         name = anarchy_start.1321.a
+
+        start_war = {
+            cb = reintegrate_anarchy_casus_belli
+            target = scope:leader
+            target_title = scope:selected_county
+        }
     }
 }
 
@@ -369,6 +573,114 @@ anarchy_start.1329 = {
 
     option = {
         name = anarchy_start.1329.a
+    }
+}
+
+anarchy_start.1380 = {
+    # Great leader type anarchy - government type change event chain
+    # root: anarchy leader
+    hidden = yes
+
+    immediate = {
+        random_list = {
+            1 = {
+                trigger_event = {
+                    id = anarchy_start.1381
+                    days = { 30 59 }
+                }
+            }
+            1 = {
+                # chance of looping this event
+                trigger_event = {
+                    id = anarchy_start.1380
+                    days = 30 
+                }
+            }
+        }
+    }
+}
+
+anarchy_start.1381 = {
+    # Great leader type anarchy - government change happens
+
+    immediate = {
+        scope:leader = {
+            if = {
+                limit = {
+                    capital_barony = {
+                        OR = {
+                            has_holding_type = tribal_holding
+                        }
+                    }
+                }
+                anarchy_end_into_tribal_effect = yes
+            }
+            else = {
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_feudal_numeric
+                    }
+                    # feudal or republic
+                    random_list = {
+                        1 = {
+                            anarchy_end_into_feudal_effect = yes
+                        }
+                        1 = {
+                            anarchy_end_into_republic_effect = yes
+                        }
+                    }
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_tribal_numeric
+                    }
+                    anarchy_end_into_tribal_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_clan_numeric
+                    }
+                    # clan or republic
+                    random_list = {
+                        1 = {
+                            anarchy_end_into_clan_effect = yes
+                        }
+                        1 = {
+                            anarchy_end_into_republic_effect = yes
+                        }
+                    }
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_administrative_numeric
+                    }
+                    anarchy_end_into_administrative_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_republic_numeric
+                    }
+                    anarchy_end_into_republic_effect = yes
+                }
+                if = {
+                    limit = {
+                        scope:previous_gov_type = government_class_theocracy_numeric
+                    }
+                    random_list = {
+                        1 = {
+                            anarchy_end_into_theocracy_effect = yes
+                        }
+                        1 = {
+                            anarchy_end_into_republic_effect = yes
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = anarchy_start.1381.a
     }
 }
 
