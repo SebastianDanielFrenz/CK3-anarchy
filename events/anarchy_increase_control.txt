@@ -1,0 +1,124 @@
+namespace = anarchy_increase_control
+
+anarchy_increase_control.0001 = {
+	title = anarchy_increase_control.0001.t
+	desc = anarchy_increase_control.0001.desc
+
+	immediate = {
+		# determine the most developed county with control under the threshold
+		save_scope_value_as = {
+			name = num_of_holdings
+			value = 0
+		}
+
+		every_directly_owned_province = {
+			if = {
+				limit = {
+					has_holding = yes
+				}
+				save_scope_value_as = {
+					name = num_of_holdings
+					value = {
+						value = scope:num_of_holdings
+						add = 1
+					}
+				}
+			}
+
+			if = {
+				limit = {
+					is_capital_barony = yes
+					county.county_control < global_var:anarchy_control_threshold
+				}
+				if = {
+					limit = {
+						NOT = { exists = scope:most_developed_county }
+					}
+					county = {
+						save_scope_as = most_developed_county
+					}
+					scope:root = {
+						add_gold = -1
+					}
+				}
+				else = {
+					if = {
+						limit = {
+							county.development_level > scope:most_developed_county.development_level
+						}
+						county = {
+							save_scope_as = most_developed_county
+						}
+						scope:root = {
+							add_gold = 1
+						}
+					}
+				}
+			}
+		}
+
+		if = {
+			limit = {
+				exists = scope:most_developed_county
+			}
+			# determine number of holdings in the county
+			save_scope_value_as = {
+				name = holding_count_in_most_developed_county
+				value = {
+					value = 0
+					scope:most_developed_county = {
+						every_county_province = {
+							if = {
+								limit = { has_holding = yes}
+								add = 1
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = anarchy_increase_control.0001.a
+		# increase control in the most developed county
+
+		add_gold = {
+			value = scope:holding_count_in_most_developed_county
+			multiply = -10
+		}
+
+		scope:most_developed_county = {
+			change_county_control = 5
+			add_county_modifier = {
+				modifier = anarchy_control_increase_modifier
+				days = 900
+			}
+		}
+	}
+
+	option = {
+		name = anarchy_increase_control.0001.b
+		
+		add_gold = {
+			value = scope:num_of_holdings
+			multiply = -10
+		}
+
+		every_directly_owned_province = {
+			if = {
+				limit = {
+					is_capital_barony = yes
+					county.county_control < global_var:anarchy_control_threshold
+				}
+				county = {
+					change_county_control = 5
+					add_county_modifier = {
+						modifier = anarchy_control_increase_modifier
+						days = 900
+					}
+				}
+			}
+		}
+	}
+}

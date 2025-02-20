@@ -7,3 +7,24 @@ anarchy_decision_create = {
         change_government = anarchy_government
     }
 }
+
+anarchy_decision_increase_control = {
+    ai_goal = yes
+
+    #cooldown = { days = 900 }
+
+    is_shown = {
+        any_directly_owned_province = {
+            county.county_control < global_var:anarchy_control_threshold
+            NOT = {
+                county = {
+                    has_county_modifier = anarchy_control_increase_modifier
+                }
+            }
+        }
+    }
+
+    effect = {
+        trigger_event = anarchy_increase_control.0001
+    }
+}

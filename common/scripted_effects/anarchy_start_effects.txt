@@ -1,3 +1,4 @@
+# root scope: character
 anarchy_check_character_effect = {
 	# save government type to scope value
 	save_scope_value_as = {
@@ -41,6 +42,11 @@ anarchy_check_character_effect = {
 			limit = {
 				is_capital_barony = yes
 				county.county_control < global_var:anarchy_control_threshold
+				NOT = {
+					county = {
+						has_county_modifier = anarchy_control_increase_modifier
+					}
+				}
 			}
 
 			random_list = {

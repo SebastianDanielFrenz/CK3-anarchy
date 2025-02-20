@@ -14,7 +14,7 @@ dev_anarchy.0001 = {
 
 		province:52 = {
 			county = {
-				change_county_control = -10
+				change_county_control = -50
 			}
 		}
 	}
@@ -45,5 +45,19 @@ dev_anarchy.0001 = {
 		name = "Anarchy complementary chance value as gold"
 
 		add_gold = global_var:anarchy_arise_chance_complementary
+	}
+	option = {
+		name = "Set to 0 in direct province"
+
+		every_directly_owned_province = {
+			if = {
+				limit = {
+					is_capital_barony = yes
+				}
+				county = {
+					change_county_control = -100
+				}
+			}
+		}
 	}
 }

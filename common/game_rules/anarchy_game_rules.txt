@@ -2,6 +2,8 @@ anarchy_toggle = {
 	default = anarchy_toggle_rule_off
 
 	anarchy_toggle_rule_off = {}
+	anarchy_toggle_rule_only_ai = {}
+	anarchy_toggle_rule_only_player = {}
 	anarchy_toggle_rule_on = {}
 }
 

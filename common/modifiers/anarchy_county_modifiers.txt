@@ -1,0 +1,3 @@
+anarchy_control_increase_modifier = {
+	monthly_county_control_growth_add = 2.0
+}

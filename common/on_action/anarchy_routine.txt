@@ -1,6 +1,16 @@
 anarchy_rounte_on_action = {
     trigger = {
-        has_game_rule = anarchy_toggle_rule_on
+        OR = {
+            has_game_rule = anarchy_toggle_rule_on
+            AND = {
+                has_game_rule = anarchy_toggle_rule_only_ai
+                is_ai = yes
+            }
+            AND = {
+                has_game_rule = anarchy_toggle_rule_only_player
+                is_ai = no
+            }
+        }
     }
 
 	effect = {
