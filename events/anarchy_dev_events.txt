@@ -47,6 +47,244 @@ dev_anarchy.0001 = {
 	}
 
 	option = {
+		name = "Start anarchy with warning"
+
+		save_scope_value_as = {
+			name = previous_gov_type
+			value = {
+				value = government_class_feudal_numeric # must be 0
+				if = {
+					limit = {
+						government_has_flag = government_is_tribal
+					}
+					add = government_class_tribal_numeric
+				}
+				if = {
+					limit = {
+						government_has_flag = government_is_clan
+					}
+					add = government_class_clan_numeric
+				}
+				if = {
+					limit = {
+						government_has_flag = government_is_administrative
+					}
+					add = government_class_administrative_numeric
+				}
+				if = {
+					limit = {
+						government_has_flag = government_is_republic
+					}
+					add = government_class_republic_numeric
+				}
+				if = {
+					limit = {
+						government_has_flag = government_is_theocracy
+					}
+					add = government_class_theocracy_numeric
+				}
+			}
+		}
+		every_directly_owned_province = {
+			if = {
+				limit = {
+					is_capital_barony = yes
+					county.county_control < global_var:anarchy_control_threshold
+					county = {
+						NOR = {
+							has_county_modifier = anarchy_control_increase_modifier
+							has_county_modifier = anarchy_arisen_cooldown_modifier
+						}
+					}
+					#NOR = {
+					#	county = {
+					#		has_county_modifier = anarchy_control_increase_modifier
+					#	}
+					#}
+				}
+	
+				random_list = {
+					0 = {
+						# this is the chance of anarchy not arising
+						modifier = {
+							add = global_var:anarchy_arise_chance_complementary
+						}
+					}
+					1 = {
+						county = {
+							save_scope_as = selected_county
+		
+							holder = {
+								if = {
+									limit = {
+										NOT = {
+											has_government = anarchy_government
+										}
+									}
+	
+									# grant modifier
+									add_county_modifier = anarchy_modifier
+									
+									save_scope_as = original_owner
+				
+									random_list = {
+										pick = 1
+										unique = yes
+										1000 = {
+											create_character = {
+												template = anarchy_criminal_bandit
+												save_scope_as = leader
+											}
+											random_list = {
+												1 = {
+													modifier = {
+														if = {
+															limit = {
+																scope:original_owner = {
+																	employs_court_position = marshal
+																}
+															}
+															add = 1
+														}
+													}
+													trigger_event = anarchy_start.0111
+												}
+												0 = {
+													trigger_event = anarchy_start.1111
+												}
+											}
+										}
+										250 = {
+											create_character = {
+												template = anarchy_criminal_syndicate
+												save_scope_as = leader
+											}
+											random_list = {
+												1 = {
+													modifier = {
+														if = {
+															limit = {
+																scope:original_owner = {
+																	employs_court_position = marshal
+																}
+															}
+															add = 1
+														}
+													}
+													trigger_event = anarchy_start.0121
+												}
+												0 = {
+													trigger_event = anarchy_start.1121
+												}
+											}
+										}
+										500 = {
+											create_character = {
+												template = anarchy_activist_peasent
+												save_scope_as = leader
+											}
+											random_list = {
+												1 = {
+													modifier = {
+														if = {
+															limit = {
+																scope:original_owner = {
+																	employs_court_position = marshal
+																}
+															}
+															add = 1
+														}
+													}
+													trigger_event = anarchy_start.0211
+												}
+												0 = {
+													trigger_event = anarchy_start.1211
+												}
+											}
+										}
+										250 = {
+											create_character = {
+												template = anarchy_activist_merchant
+												save_scope_as = leader
+											}
+											random_list = {
+												1 = {
+													modifier = {
+														if = {
+															limit = {
+																scope:original_owner = {
+																	employs_court_position = marshal
+																}
+															}
+															add = 1
+														}
+													}
+													trigger_event = anarchy_start.0221
+												}
+												0 = {
+													trigger_event = anarchy_start.1221
+												}
+											}
+										}
+										10 = {
+											create_character = {
+												template = anarchy_great_leader
+												save_scope_as = leader
+											}
+											random_list = {
+												1 = {
+													modifier = {
+														if = {
+															limit = {
+																scope:original_owner = {
+																	employs_court_position = marshal
+																}
+															}
+															add = 1
+														}
+													}
+													trigger_event = anarchy_start.0311
+												}
+												0 = {
+													trigger_event = anarchy_start.1311
+												}
+											}
+										}
+										100000 = {
+											create_character = {
+												template = anarchy_scurge
+												save_scope_as = leader
+											}
+											random_list = {
+												1 = {
+													modifier = {
+														if = {
+															limit = {
+																scope:original_owner = {
+																	employs_court_position = marshal
+																}
+															}
+															add = 1
+														}
+													}
+													trigger_event = anarchy_start.0321
+												}
+												0 = {
+													trigger_event = anarchy_start.1321
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}                               
+			}
+		}
+	}
+
+	option = {
 		name = "Anarchy complementary chance value as gold"
 
 		add_gold = global_var:anarchy_arise_chance_complementary
@@ -63,6 +301,34 @@ dev_anarchy.0001 = {
 					change_county_control = -100
 				}
 			}
+		}
+	}
+
+	option = {
+		name = "Clear preventing modifiers"
+
+		every_directly_owned_province = {
+			if = {
+				limit = {
+					is_capital_barony = yes
+				}
+				county = {
+					remove_county_modifier = anarchy_control_increase_modifier
+					remove_county_modifier = anarchy_arisen_cooldown_modifier
+				}
+			}
+		}
+	}
+
+	option = {
+		name = "spawn army"
+
+		spawn_army = {
+			levies = 3000
+			location = capital_province
+			inheritable = yes
+			uses_supply = yes
+			name = "Great Leader's Army"
 		}
 	}
 }

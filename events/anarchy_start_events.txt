@@ -2,9 +2,9 @@ namespace = anarchy_start
 
 # Event chain starts with root character scope 
 
-# 000X - Start of the event chain
-# 1YXX - Class of the leader type Y
-# 11XX - Leader is a criminal
+# 000X - Start of the event chain (debug only at this point; normally event chain is started by on_action)
+# 111X - Leader is a minor criminal
+# 112X - Leader is a criminal syndicate boss
 # 12XX - Leader is an activist
 # 13XX - Leader is a great leader
 
@@ -87,6 +87,503 @@ anarchy_start.0001 = {
     #}
 }
 
+# ==================================================
+#
+# PRECLUDE EVENTS
+#
+# ==================================================
+anarchy_start.0111 = {
+    # New leader will be minor bandit
+    title = anarchy_start.0111.t
+    desc = anarchy_start.0111.desc
+
+    theme = realm
+    left_portrait = scope:leader
+    right_portrait = {
+        character = scope:original_owner
+    }
+
+    option = {
+        name = anarchy_start.0xxx.a
+        # try to re-establish control (cheap)
+        remove_reserved_gold = 5
+        random_list = {
+            75 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            25 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1111
+                    days = { 20 60 }
+                }
+            }
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.b
+        # try to increase control (expensive)
+        remove_reserved_gold = 15
+        random_list = {
+            95 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            5 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1111
+                    days = { 30 90 }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.c
+        # Do nothing; next event in the chain will be triggered
+        trigger_event = {
+            id = anarchy_start.1111
+            days = { 10 30 }
+        }
+    }
+}
+
+anarchy_start.0121 = {
+    # New leader will be a criminal syndicate boss
+    title = anarchy_start.0121.t
+    desc = anarchy_start.0121.desc
+
+    theme = realm
+    left_portrait = scope:leader
+    right_portrait = {
+        character = scope:original_owner
+    }
+    
+    option = {
+        name = anarchy_start.0xxx.a
+        # try to re-establish control (cheap)
+        remove_reserved_gold = 5
+        random_list = {
+            70 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            30 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1121
+                    days = { 20 60 }
+                }
+            }
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.b
+        # try to increase control (expensive)
+        remove_reserved_gold = 15
+        random_list = {
+            95 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            5 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1121
+                    days = { 30 90 }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.c
+        # Do nothing; next event in the chain will be triggered
+        trigger_event = {
+            id = anarchy_start.1121
+            days = { 10 30 }
+        }
+    }
+}
+
+anarchy_start.0211 = {
+    # New leader will be a peasent activist
+    title = anarchy_start.0211.t
+    desc = anarchy_start.0211.desc
+
+    theme = realm
+    left_portrait = scope:leader
+    right_portrait = {
+        character = scope:original_owner
+    }
+    
+    option = {
+        name = anarchy_start.0xxx.a
+        # try to re-establish control (cheap)
+        remove_reserved_gold = 5
+        random_list = {
+            70 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            30 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1211
+                    days = { 20 60 }
+                }
+            }
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.b
+        # try to increase control (expensive)
+        remove_reserved_gold = 15
+        random_list = {
+            95 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            5 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1211
+                    days = { 30 90 }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.c
+        # Do nothing; next event in the chain will be triggered
+        trigger_event = {
+            id = anarchy_start.1211
+            days = { 10 30 }
+        }
+    }
+}
+
+anarchy_start.0221 = {
+    # New leader will be a merchant activist
+    title = anarchy_start.0221.t
+    desc = anarchy_start.0221.desc
+
+    theme = realm
+    left_portrait = scope:leader
+    right_portrait = {
+        character = scope:original_owner
+    }
+    
+    option = {
+        name = anarchy_start.0xxx.a
+        # try to re-establish control (cheap)
+        remove_reserved_gold = 5
+        random_list = {
+            70 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            30 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1221
+                    days = { 20 60 }
+                }
+            }
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.b
+        # try to increase control (expensive)
+        remove_reserved_gold = 15
+        random_list = {
+            95 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            5 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1221
+                    days = { 30 90 }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.c
+        # Do nothing; next event in the chain will be triggered
+        trigger_event = {
+            id = anarchy_start.1221
+            days = { 10 30 }
+        }
+    }
+}
+
+anarchy_start.0311 = {
+    # New leader will be a great leader
+    title = anarchy_start.0311.t
+    desc = anarchy_start.0311.desc
+
+    theme = realm
+    left_portrait = scope:leader
+    right_portrait = {
+        character = scope:original_owner
+    }
+    
+    option = {
+        name = anarchy_start.0xxx.a
+        # try to re-establish control (cheap)
+        remove_reserved_gold = 5
+        random_list = {
+            70 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            30 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1311
+                    days = { 20 60 }
+                }
+            }
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.b
+        # try to increase control (expensive)
+        remove_reserved_gold = 15
+        random_list = {
+            95 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            5 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1311
+                    days = { 30 90 }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.c
+        # Do nothing; next event in the chain will be triggered
+        trigger_event = {
+            id = anarchy_start.1311
+            days = { 10 30 }
+        }
+    }
+}
+
+anarchy_start.0321 = {
+    # New leader will be a scurge
+    title = anarchy_start.0321.t
+    desc = anarchy_start.0321.desc
+
+    theme = realm
+    left_portrait = scope:leader
+    right_portrait = {
+        character = scope:original_owner
+    }
+    
+    option = {
+        name = anarchy_start.0xxx.a
+        # try to re-establish control (cheap)
+        remove_reserved_gold = 5
+        random_list = {
+            70 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            30 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1321
+                    days = { 20 60 }
+                }
+            }
+        }
+
+        ai_chance = {
+            base = 50
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.b
+        # try to increase control (expensive)
+        remove_reserved_gold = 15
+        random_list = {
+            95 = {
+                # success
+                scope:selected_county = {
+                    change_county_control = 5
+                    add_county_modifier = {
+                        modifier = anarchy_control_increase_modifier
+                        days = 600
+                    }
+                }
+            }
+            5 = {
+                # failure
+                custom_label = {
+                    text = anarchy_start.0xxx.failure
+                }
+                trigger_event = {
+                    id = anarchy_start.1321
+                    days = { 30 90 }
+                }
+            }
+        }
+    }
+
+    option = {
+        name = anarchy_start.0xxx.c
+        # Do nothing; next event in the chain will be triggered
+        trigger_event = {
+            id = anarchy_start.1321
+            days = { 10 30 }
+        }
+    }
+}
+
+# ==================================================
+#
+# MAIN EVENT CHAIN
+#
+# ==================================================
+
 anarchy_start.1111 = {
     # New leader is a minor bandit
     title = anarchy_start.1111.t
@@ -113,8 +610,16 @@ anarchy_start.1111 = {
                 trigger_event = anarchy_start.1180
             }
         }
+
+        hidden_effect = {
+            scope:leader = {
+                add_prestige = 300
+            }
+        }
     }
 
+    theme = war
+    override_background = burning_building
     left_portrait = scope:leader
     right_portrait = {
         character = scope:original_owner
@@ -133,10 +638,31 @@ anarchy_start.1111 = {
             }
         }
     }
+
+    option = {
+        name = anarchy_start.1111.b
+        # leader becomes independant
+        create_title_and_vassal_change = {
+			type = independency
+			save_scope_as = change
+		}
+
+		scope:attacker = {
+			change_liege_or_become_independent = {
+				CHANGE = scope:change
+				VASSAL = this
+			}
+		}
+		
+		resolve_title_and_vassal_change = scope:change
+    }
 }
 
 anarchy_start.1121 = {
     # New leader is a criminal syndicate boss
+    title = anarchy_start.1121.t
+    desc = anarchy_start.1121.desc
+
     immediate = {
         scope:selected_county = {
             create_title_and_vassal_change = {
@@ -158,12 +684,20 @@ anarchy_start.1121 = {
                 trigger_event = anarchy_start.1180
             }
         }
+
+        hidden_effect = {
+            scope:leader = {
+                add_prestige = 500
+            }
+        }
     }
 
+    theme = realm
+    override_background = burning_building
     left_portrait = scope:leader
     right_portrait = {
         character = scope:original_owner
-        animation = anger
+        animation = war_over_loss
     }
 
     option = {
@@ -176,6 +710,24 @@ anarchy_start.1121 = {
                 target_title = scope:selected_county
             }
         }
+    }
+
+    option = {
+        name = anarchy_start.1121.b
+        # leader becomes independant
+        create_title_and_vassal_change = {
+			type = independency
+			save_scope_as = change
+		}
+
+		scope:leader = {
+			change_liege_or_become_independent = {
+				CHANGE = scope:change
+				VASSAL = this
+			}
+		}
+		
+		resolve_title_and_vassal_change = scope:change
     }
 }
 
@@ -205,6 +757,8 @@ anarchy_start.1180 = {
 
 anarchy_start.1181 = {
     # Criminal type anarchy - government change happens
+    title = anarchy_start.1181.t
+    desc = anarchy_start.1181.desc
 
     immediate = {
         scope:leader = {
@@ -259,6 +813,12 @@ anarchy_start.1181 = {
         }
     }
 
+    theme = crown
+    left_portrait = {
+        character = scope:leader
+        animation = ecstasy
+    }
+
     option = {
         name = anarchy_start.1181.a
     }
@@ -266,6 +826,9 @@ anarchy_start.1181 = {
 
 anarchy_start.1211 = {
     # New leader is a peasent activist
+    title = anarchy_start.1211.t
+    desc = anarchy_start.1211.desc
+
     immediate = {
         scope:selected_county = {
             create_title_and_vassal_change = {
@@ -285,6 +848,12 @@ anarchy_start.1211 = {
             scope:leader = {
                 change_government = anarchy_government
                 trigger_event = anarchy_start.1280
+            }
+        }
+
+        hidden_effect = {
+            scope:leader = {
+                add_prestige = 500
             }
         }
 
@@ -312,6 +881,9 @@ anarchy_start.1211 = {
 
 anarchy_start.1221 = {
     # New leader is a merchant activist
+    title = anarchy_start.1221.t
+    desc = anarchy_start.1221.desc
+
     immediate = {
         scope:selected_county = {
             create_title_and_vassal_change = {
@@ -331,7 +903,12 @@ anarchy_start.1221 = {
             scope:leader = {
                 change_government = anarchy_government
                 trigger_event = anarchy_start.1280
+            }
+        }
 
+        hidden_effect = {
+            scope:leader = {
+                add_prestige = 700
                 add_long_term_gold = 200
             }
         }
@@ -468,6 +1045,9 @@ anarchy_start.1281 = {
 
 anarchy_start.1311 = {
     # New leader is a great leader
+    title = anarchy_start.1311.t
+    desc = anarchy_start.1311.desc
+
     immediate = {
         scope:selected_county = {
             create_title_and_vassal_change = {
@@ -500,6 +1080,20 @@ anarchy_start.1311 = {
                 trigger_event = anarchy_start.1319
             }
         }
+
+        hidden_effect = {
+            scope:leader = {
+                add_prestige = 1500
+                add_gold = 100
+                spawn_army = {
+                    levies = 3000
+                    location = scope:selected_county.title_province
+                    inheritable = yes
+                    uses_supply = yes
+                    name = "Ferverous Mob"
+                }
+            }
+        }
     }
 
     left_portrait = scope:leader
@@ -523,6 +1117,8 @@ anarchy_start.1311 = {
 
 anarchy_start.1319 = {
     # Great leader event notification for players
+    title = anarchy_start.1319.t
+    desc = anarchy_start.1319.desc
 
     theme = war
     left_portrait = scope:leader
@@ -534,6 +1130,9 @@ anarchy_start.1319 = {
 
 anarchy_start.1321 = {
     # New leader is a scurge
+    title = anarchy_start.1321.t
+    desc = anarchy_start.1321.desc
+
     immediate = {
         scope:selected_county = {
             create_title_and_vassal_change = {
@@ -552,14 +1151,31 @@ anarchy_start.1321 = {
 
             scope:leader = {
                 change_government = anarchy_government
+                trigger_event = anarchy_start.1380
             }
         }
 
         every_player = {
             trigger_event = anarchy_start.1329
         }
+
+        hidden_effect = {
+            scope:leader = {
+                add_prestige = 3000
+                add_gold = 200
+                spawn_army = {
+                    levies = 6000
+                    location = scope:selected_county.title_province
+                    inheritable = yes
+                    uses_supply = yes
+                    name = "Ferverous Mob"
+                }
+            }
+        }
     }
 
+    theme = war
+    override_background = burning_building
     left_portrait = scope:leader
     right_portrait = {
         character = scope:original_owner
@@ -581,6 +1197,8 @@ anarchy_start.1321 = {
 
 anarchy_start.1329 = {
     # Scurge event notification for players
+    title = anarchy_start.1329.t
+    desc = anarchy_start.1329.desc
 
     theme = war
     left_portrait = scope:leader
@@ -600,14 +1218,14 @@ anarchy_start.1380 = {
             1 = {
                 trigger_event = {
                     id = anarchy_start.1381
-                    days = { 30 59 }
+                    days = { 1 4 }
                 }
             }
             1 = {
                 # chance of looping this event
                 trigger_event = {
                     id = anarchy_start.1380
-                    days = 30 
+                    days = 5 
                 }
             }
         }
@@ -616,6 +1234,8 @@ anarchy_start.1380 = {
 
 anarchy_start.1381 = {
     # Great leader type anarchy - government change happens
+    title = anarchy_start.1381.t
+    desc = anarchy_start.1381.desc
 
     immediate = {
         scope:leader = {

@@ -87,42 +87,144 @@ anarchy_check_character_effect = {
 											template = anarchy_criminal_bandit
 											save_scope_as = leader
 										}
-										trigger_event = anarchy_start.1111
+										random_list = {
+											10 = {
+												modifier = {
+													if = {
+														limit = {
+															scope:original_owner = {
+																employs_court_position = marshal
+															}
+														}
+														add = 1
+													}
+												}
+												trigger_event = anarchy_start.0111
+											}
+											1 = {
+												trigger_event = anarchy_start.1111
+											}
+										}
 									}
 									250 = {
 										create_character = {
 											template = anarchy_criminal_syndicate
 											save_scope_as = leader
 										}
-										trigger_event = anarchy_start.1121
+										random_list = {
+											10 = {
+												modifier = {
+													if = {
+														limit = {
+															scope:original_owner = {
+																employs_court_position = marshal
+															}
+														}
+														add = 1
+													}
+												}
+												trigger_event = anarchy_start.0121
+											}
+											1 = {
+												trigger_event = anarchy_start.1121
+											}
+										}
 									}
 									500 = {
 										create_character = {
 											template = anarchy_activist_peasent
 											save_scope_as = leader
 										}
-										trigger_event = anarchy_start.1211
+										random_list = {
+											10 = {
+												modifier = {
+													if = {
+														limit = {
+															scope:original_owner = {
+																employs_court_position = marshal
+															}
+														}
+														add = 1
+													}
+												}
+												trigger_event = anarchy_start.0211
+											}
+											1 = {
+												trigger_event = anarchy_start.1211
+											}
+										}
 									}
 									250 = {
 										create_character = {
 											template = anarchy_activist_merchant
 											save_scope_as = leader
 										}
-										trigger_event = anarchy_start.1221
+										random_list = {
+											10 = {
+												modifier = {
+													if = {
+														limit = {
+															scope:original_owner = {
+																employs_court_position = marshal
+															}
+														}
+														add = 1
+													}
+												}
+												trigger_event = anarchy_start.0221
+											}
+											1 = {
+												trigger_event = anarchy_start.1221
+											}
+										}
 									}
 									10 = {
 										create_character = {
 											template = anarchy_great_leader
 											save_scope_as = leader
 										}
-										trigger_event = anarchy_start.1311
+										random_list = {
+											10 = {
+												modifier = {
+													if = {
+														limit = {
+															scope:original_owner = {
+																employs_court_position = marshal
+															}
+														}
+														add = 1
+													}
+												}
+												trigger_event = anarchy_start.0311
+											}
+											1 = {
+												trigger_event = anarchy_start.1311
+											}
+										}
 									}
 									1 = {
 										create_character = {
 											template = anarchy_scurge
 											save_scope_as = leader
 										}
-										trigger_event = anarchy_start.1321
+										random_list = {
+											10 = {
+												modifier = {
+													if = {
+														limit = {
+															scope:original_owner = {
+																employs_court_position = marshal
+															}
+														}
+														add = 1
+													}
+												}
+												trigger_event = anarchy_start.0321
+											}
+											1 = {
+												trigger_event = anarchy_start.1321
+											}
+										}
 									}
 								}
 							}

@@ -29,7 +29,7 @@ anarchy_great_leader = {
 
 anarchy_scurge = {
 	category = fame
-	flag = conqueror_bonuses_modifier
+	flag = conqueror_bonuses_modifier 
 
 	ai_war_chance = -100
 	ai_war_cooldown = -100
@@ -50,6 +50,8 @@ anarchy_scurge = {
 	monthly_piety = 2
 	knight_limit = 100
 	knight_effectiveness_mult = 1
+	army_siege_value_mult = 2
+	levy_siege = 2
 
 	vassal_opinion = 100
 
@@ -62,4 +64,9 @@ anarchy_scurge = {
 
 	monthly_lifestyle_xp_gain_mult = 1.0
 	levy_size = 4
+	
+	ai_war_chance = -100
+	ai_war_cooldown = -100
+	ai_amenity_spending = -0.25
+	ai_amenity_target_baseline = -0.4
 }
