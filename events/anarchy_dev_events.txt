@@ -4,9 +4,14 @@ dev_anarchy.0001 = {
 	left_portrait = root
 
 	option = {
-		name = dev_anarchy.0001.a
+		name = "Grant cooldown modifier to capital county"
 
-		add_gold = 1
+		capital_county = {
+			add_county_modifier = {
+				modifier = anarchy_arisen_cooldown_modifier
+				years = 1
+			}
+		}
 	}
 
 	option = {

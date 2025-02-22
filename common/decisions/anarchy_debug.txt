@@ -1,12 +1,12 @@
-anarchy_decision_create = {
-    effect = {
-        #province:1000 = {
-        #    
-        #}
-
-        change_government = anarchy_government
-    }
-}
+#anarchy_decision_create = {
+#    effect = {
+#        #province:1000 = {
+#        #    
+#        #}
+#
+#        change_government = anarchy_government
+#    }
+#}
 
 anarchy_decision_increase_control = {
     ai_goal = yes
@@ -16,9 +16,10 @@ anarchy_decision_increase_control = {
     is_shown = {
         any_directly_owned_province = {
             county.county_control < global_var:anarchy_control_threshold
-            NOT = {
-                county = {
+            county = {
+                NOR = {
                     has_county_modifier = anarchy_control_increase_modifier
+                    has_county_modifier = anarchy_arisen_cooldown_modifier
                 }
             }
         }

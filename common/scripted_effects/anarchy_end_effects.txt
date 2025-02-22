@@ -2,8 +2,13 @@
 # scope:leader
 
 anarchy_end_control_effect = {
-	every_realm_county = {
+	every_sub_realm_county = {
 		change_county_control = 100
+		remove_county_modifier = anarchy_modifier
+		add_county_modifier = {
+			modifier = anarchy_arisen_cooldown_modifier
+			years = 5
+		}
 	}
 }
 

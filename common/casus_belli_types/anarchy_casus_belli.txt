@@ -1,6 +1,24 @@
 reintegrate_anarchy_casus_belli = {
-	icon = minor_religious_war
-	group = religious
+	icon = independence_faction_war
+	group = civil_war
+	
+	target_titles = independence_domain
+	allow_hostages = no
+	allowed_for_character = {
+		always = no
+	}
+
+	allowed_against_character = {
+		scope:defender = {
+			has_government = anarchy_government
+		}
+	}
+
+	target_de_jure_regions_above = yes
+
+	valid_to_start = {
+		always = yes
+	}
 
 	#defender_faith_can_join = no
 
@@ -33,66 +51,104 @@ reintegrate_anarchy_casus_belli = {
 		always = yes
 	}
 
-	#should_invalidate = {
-	#	OR = {
-	#		NOT = {
-	#			any_in_list = {
-	#				list = target_titles
-	#				any_in_de_jure_hierarchy = {
-	#					tier = tier_county
-	#					holder = {
-	#						OR = {
-	#							this = scope:defender
-	#							target_is_liege_or_above = scope:defender
-	#						}
-	#					}
-	#				}
-	#			}
-	#		}
-	#		#Faith change does not immediately invalidate, it's run through event war_event.3100
-	#		scope:war = { exists = var:invalidate_defender_faith_change }
-	#		scope:war = { exists = var:invalidate_attacker_faith_change }
-	#	}
-	#}
+	on_victory_desc = {
+		first_valid = {
+			triggered_desc = {
+				trigger = { # Desc for only one player attacker
+					scope:attacker = {
+						is_local_player = yes
+						exists = joined_faction
+						joined_faction = {
+							any_faction_member = {
+								count = 1
+							}
+						}
+					}
+				}
+				desc = independence_war_victory_desc_local_player_attacker_alone
+			}
+			triggered_desc = { # Desc for only one attacker, player defender
+				trigger = {
+					scope:defender = {
+						is_local_player = yes
+					}
+					scope:attacker = {
+						exists = joined_faction
+						joined_faction = {
+							any_faction_member = {
+								count = 1
+							}
+						}
+					}
+				}
+				desc = independence_war_victory_desc_local_player_defender_attacker_alone
+			}
+			triggered_desc = { # Desc for player attacker
+				trigger = {
+					OR = {
+						AND = {
+							exists = scope:attacker.joined_faction
+							scope:attacker.joined_faction = {
+								any_faction_member = { is_local_player = yes }
+							}
+						}
+						AND = {
+							scope:attacker = {
+								is_local_player = yes
+								has_character_flag = should_become_independent
+							}
+						}
+					}
+				}
+				desc = independence_war_victory_desc_local_player_attacker
+			}
+			triggered_desc = { # Desc for player defender
+				trigger = { scope:defender = { is_local_player = yes } }
+				desc = independence_war_victory_desc_local_player_defender
+			}
+			desc = independence_war_victory_desc # Desc for a third party involved
+		}
 
-	#on_invalidated_desc = {
-	#	first_valid = {
-	#		triggered_desc = {
-	#			trigger = {
-	#				NOT = {
-	#					any_in_list = {
-	#						list = target_titles
-	#						any_in_de_jure_hierarchy = {
-	#							tier = tier_county
-	#							holder = {
-	#								OR = {
-	#									this = scope:defender
-	#									target_is_liege_or_above = scope:defender
-	#								}
-	#							}
-	#						}
-	#					}
-	#				}
-	#			}
-	#			desc = msg_religious_war_invalidation_region_message
-	#		}
-	#		triggered_desc = {
-	#			trigger = {
-	#				scope:war = {
-	#					OR = {
-	#						exists = var:invalidate_defender_faith_change
-	#						exists = var:invalidate_attacker_faith_change
-	#					}
-	#				}
-	#			}
-	#			desc = msg_religious_war_invalidated_hostility_level_message
-	#		}
-	#	}
-	#}
-
-	on_invalidated = {
-		
 	}
+
+	on_victory = {
+		scope:attacker = { show_pow_release_message_effect = yes }
+
+		#EP2 Accolade glory gain from winning against higher ranked enemy
+		scope:attacker = { accolade_attacker_war_end_glory_gain_med_effect = yes }
+
+		create_title_and_vassal_change = {
+			type = independency
+			save_scope_as = change
+		}
+
+		scope:attacker = {
+			change_liege_or_become_independent = {
+				CHANGE = scope:change
+				VASSAL = this
+			}
+		}
+		
+		resolve_title_and_vassal_change = scope:change
+
+		# LEGITIMACY FROM LOSING FACTION WAR
+		faction_war_end_defeat_legitimacy_effect = yes
+
+		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
+		laamp_as_mercenary_payout_tooltip_effect = yes
+	}
+
+	on_invalidated_desc = msg_invalidate_war_title
+
+	check_defender_inheritance_validity = no
+
+	on_primary_attacker_death = inherit
+	on_primary_defender_death = inherit
+
+	attacker_allies_inherit = no
+	defender_allies_inherit = yes
+
+	transfer_behavior = transfer
 	
 	ai_score_mult = {
 		value = 1
@@ -135,40 +191,6 @@ reintegrate_anarchy_casus_belli = {
 	}
 
 	cost = {
-		#piety = {
-		#	add = {
-		#		value = 100
-		#		desc = CB_BASE_COST
-		#	}
-		#	multiply = common_cb_piety_cost_multiplier
-		#	multiply = holy_war_cb_piety_cost_multiplier
-		#	if = {
-		#		limit = {
-		#			scope:attacker = {
-		#				any_active_accolade = {
-		#					has_accolade_parameter = acclaimed_knight_piety_from_battle
-		#				}
-		#			}
-		#		}
-		#		multiply = accolade_piety_reduction_value
-		#		min = 10
-		#	}
-		#	if = {
-		#		limit = {
-		#			scope:attacker = {
-		#				any_active_accolade = {
-		#					has_accolade_parameter = acclaimed_knight_piety_from_battle_high
-		#				}
-		#			}
-		#		}
-		#		multiply = accolade_piety_reduction_value_high
-		#		min = 10
-		#	}
-		#}
-	}
-
-	on_declaration = {
-		on_declared_war = yes
 	}
 
 	on_victory_desc = {
@@ -187,105 +209,22 @@ reintegrate_anarchy_casus_belli = {
 
 	on_victory = {
 		scope:attacker = { show_pow_release_message_effect = yes }
-		
-		# Legitimacy
-		# add_legitimacy_attacker_victory_effect = yes
-		
-		#EP2 accolade glory gain from winning against higher ranked enemy
-		# scope:attacker = { accolade_attacker_war_end_glory_gain_low_effect = yes }
+
+		#EP2 Accolade glory gain from winning against higher ranked enemy
+		scope:attacker = { accolade_attacker_war_end_glory_gain_med_effect = yes }
+
 
 		create_title_and_vassal_change = {
-			type = conquest
+			type = independency
 			save_scope_as = change
-			add_claim_on_loss = yes
 		}
 
-		# EP3 Laamp possibility warning
-		# scope:defender = { ep3_war_loss_adventurer_tt_effect = yes }
-
-		# go through the dejure hierarchy under target titles, transfer titles with same or worse tolerance holders (their religion equaly or less tolerated than the defender's),
-		# take the holder as vassal otherwise and don't go deeper
-		every_in_list = {
-			list = target_titles
-			custom_tooltip = RELIGIOUS_CB_TITLE
-
-			conquest_cb_title_transfer = {
-				RELIGIOUS_WAR = yes
-			}
-		}
-
-		every_in_list = {
-			list = vassals_taken
-			change_liege = {
-				liege = scope:attacker
-				change = scope:change
-			}
-		}
-		
-		every_in_list = {
-			list = titles_taken
-			change_title_holder = {
-				holder = scope:attacker
-				change = scope:change
-				take_baronies = yes
-			}
+		change_liege_or_become_independent = {
+			CHANGE = scope:change
+			VASSAL = this
 		}
 
 		resolve_title_and_vassal_change = scope:change
-
-		# Allies on both sides get full prestige value for helping in the war, based on their war participation.
-		modify_allies_of_participants_fame_values = {
-			WINNER = scope:defender
-			FAME_BASE = religious_cb_ally_prestige_county
-			IS_RELIGIOUS_WAR = no
-			WINNER_ALLY_FAME_SCALE = 1
-			LOSER_ALLY_FAME_SCALE = 1
-		}
-
-		# Piety Progress for the Attacker
-		every_in_list = {
-			list = target_titles
-			scope:attacker = {
-				add_piety_experience = {
-					add = religious_cb_piety_gain_county
-					if = {
-						limit = {
-							scope:attacker.faith = {
-								has_doctrine_parameter = bonus_holy_war_piety_active
-							}
-						}
-						multiply = 1.5
-					}
-				}
-			}
-		}
-
-		ordered_in_list = {
-			list = target_titles
-			order_by = tier
-			max = 1
-
-			save_scope_as = war_goal_title
-		}
-
-		scope:attacker.faith = {
-			change_fervor = {
-				value = -1
-				desc = fervor_loss_religious_war
-			}
-		}
-		scope:defender.faith = {
-			change_fervor = {
-				value = 3
-				desc = fervor_gain_religious_war
-			}
-		}
-
-		# Truce
-		add_truce_attacker_victory_effect = yes
-
-		# FP1: note the victory for future memorialisation via stele (if applicable).
-		scope:attacker = { fp1_remember_recent_conquest_victory_effect = yes }
 
 		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
 		laamp_as_mercenary_payout_tooltip_effect = yes
@@ -329,82 +268,62 @@ reintegrate_anarchy_casus_belli = {
 	}
 
 	on_defeat_desc = {
-		desc = religious_war_defeat_desc
+		first_valid = {
+			triggered_desc = {
+				trigger = { scope:defender = { is_local_player = yes } }
+				desc = independence_defeat_defender_desc
+			}
+			triggered_desc = {
+				trigger = {
+					OR = {
+						AND = {
+							exists = scope:attacker.joined_faction
+							scope:attacker.joined_faction = {
+								any_faction_member = { is_local_player = yes }
+							}
+						}
+						AND = {
+							scope:attacker = {
+								is_local_player = yes
+								has_character_flag = should_become_independent
+							}
+						}
+					}
+				}
+				desc = independence_defeat_attacker_desc
+			}
+			desc = player_independence_war_defeat_desc #same loc as for player
+		}
+		desc = independence_defeat_end_desc
 	}
 
 	on_defeat = {
 		scope:attacker = { show_pow_release_message_effect = yes }
-		
-		# Legitimacy
-		add_legitimacy_attacker_defeat_effect = yes
+		scope:defender = {
+			add_dread = medium_dread_gain
+			# Prestige for Defender
+			add_prestige_war_defender_effect = {
+				PRESTIGE_VALUE = medium_prestige_value
+			}
+		}
 
-		#EP2 accolade glory gain for winning against higher ranked enemy
-		scope:defender = { accolade_defender_war_end_glory_gain_low_effect = yes }
+		# attacker looses title
+		create_title_and_vassal_change = {
+			type = conquest
+			save_scope_as = change
+			add_claim_on_loss = no
+		}
 
 		scope:attacker = {
-			every_vassal = {
-				limit = { faith = scope:attacker.faith }
-				custom = all_attackers_vassals_same_faith
-				add_opinion = {
-					modifier = liege_lost_declared_religious_war
-					target = scope:attacker
+			every_sub_realm_county = {
+				change_title_holder = {
+					holder = scope:defender
+					change = scope:change
+					take_baronies = yes
 				}
 			}
 		}
-
-		# Allies on both sides get full prestige value for helping in the war, based on their war participation.
-		modify_allies_of_participants_fame_values = {
-			WINNER = scope:defender
-			FAME_BASE = religious_cb_ally_prestige_county
-			IS_RELIGIOUS_WAR = no
-			WINNER_ALLY_FAME_SCALE = 1
-			LOSER_ALLY_FAME_SCALE = 1
-		}
-
-		# piety change
-		every_in_list = {
-			list = target_titles
-
-			scope:defender = {
-				add_piety = {
-					add = religious_cb_piety_gain_county
-					if = {
-						limit = {
-							scope:defender.faith = {
-								has_doctrine_parameter = bonus_holy_war_piety_active
-							}
-						}
-						multiply = 1.5
-					}
-				}
-			}
-
-			scope:attacker = {
-				if = {
-					limit = {
-						monthly_character_income > 0
-					}
-					pay_short_term_income = {
-						years = 2
-						target = scope:defender
-					}
-				}
-				else = {
-					pay_short_term_gold = {
-						target = scope:defender
-						gold = medium_gold_value
-					}
-				}
-			}
-		}
-
-		# Truce
-		add_truce_attacker_defeat_effect = yes
-
-		scope:attacker = {
-			save_temporary_scope_as = loser
-		}
-		on_lost_aggression_war_discontent_loss = yes
+		resolve_title_and_vassal_change = scope:change
 
 		# EP3: note gold gained from military assistance/join war contracts and their war contribution threshold
 		laamp_as_mercenary_payout_tooltip_effect = yes
@@ -421,13 +340,16 @@ reintegrate_anarchy_casus_belli = {
 	war_name = "REINTEGRATE_ANARCHY_WAR_NAME"
 	cb_name = "REINTEGRATE_ANARCHY_CB_NAME"
 
-	is_holy_war = yes
-
 	interface_priority = 80
 
 	use_de_jure_wargoal_only = yes
 
-	attacker_wargoal_percentage = 0.8
+	attacker_wargoal_percentage = 1.0
+	defender_wargoal_percentage = 0.0 # A single occupation will do
+	defender_ticking_warscore_delay = { days = 0 } # No need for a delay here since the defender actually needs to occupy something rather than starting in control
+
+	max_attacker_score_from_battles = 100
+	max_defender_score_from_battles = 50
 	
 	max_defender_score_from_occupation = 150
 	max_attacker_score_from_occupation = 150

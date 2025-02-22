@@ -42,16 +42,22 @@ anarchy_check_character_effect = {
 			limit = {
 				is_capital_barony = yes
 				county.county_control < global_var:anarchy_control_threshold
-				NOT = {
-					county = {
+				county = {
+					NOR = {
 						has_county_modifier = anarchy_control_increase_modifier
+						has_county_modifier = anarchy_arisen_cooldown_modifier
 					}
 				}
+				#NOR = {
+				#	county = {
+				#		has_county_modifier = anarchy_control_increase_modifier
+				#	}
+				#}
 			}
 
 			random_list = {
 				0 = {
-					# value of highest possible chance is base value (100)
+					# this is the chance of anarchy not arising
 					modifier = {
 						add = global_var:anarchy_arise_chance_complementary
 					}
@@ -67,6 +73,9 @@ anarchy_check_character_effect = {
 										has_government = anarchy_government
 									}
 								}
+
+								# grant modifier
+								add_county_modifier = anarchy_modifier
 								
 								save_scope_as = original_owner
 			

@@ -13,6 +13,8 @@ anarchy_great_leader = {
 	enemy_hostile_scheme_phase_duration_add = 25
 	enemy_hostile_scheme_success_chance_max_add = -40
 	enemy_hostile_scheme_success_chance_growth_add = -3
+
+	movement_speed = 0.35
 	
 	shown_in_ruler_designer = no
 

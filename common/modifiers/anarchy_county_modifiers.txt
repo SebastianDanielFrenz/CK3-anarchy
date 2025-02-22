@@ -1,3 +1,11 @@
 anarchy_control_increase_modifier = {
 	monthly_county_control_growth_add = 2.0
 }
+
+anarchy_arisen_cooldown_modifier = {
+	development_growth = 0.2
+}
+
+anarchy_modifier = {
+	development_growth = -5
+}

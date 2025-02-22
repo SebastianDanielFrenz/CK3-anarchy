@@ -62,5 +62,5 @@ anarchy_government = {
     # house_unity ?
     # domicile_type ?
 
-    color = { 200 200 200 }
+    color = hsv{ 0.00 0.50 0.00 }
 }

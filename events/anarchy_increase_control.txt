@@ -10,12 +10,21 @@ anarchy_increase_control.0001 = {
 			name = num_of_holdings
 			value = 0
 		}
+		save_scope_value_as = {
+			name = num_of_holdings_in_imminent_danger
+			value = 0
+		}
 
 		every_directly_owned_province = {
 			if = {
 				limit = {
 					has_holding = yes
+					county.county_control < global_var:anarchy_control_threshold
+					county = {
+						NOT = { has_county_modifier = anarchy_control_increase_modifier }
+					}
 				}
+				# count number of holdings without the control increase modifier
 				save_scope_value_as = {
 					name = num_of_holdings
 					value = {
@@ -23,22 +32,33 @@ anarchy_increase_control.0001 = {
 						add = 1
 					}
 				}
-			}
 
-			if = {
-				limit = {
-					is_capital_barony = yes
-					county.county_control < global_var:anarchy_control_threshold
+				# count number of holdings in imminent danger of being taken over by anarchy
+				if = {
+					limit = {
+						county = {
+							NOT = {
+								has_county_modifier = anarchy_arisen_cooldown_modifier
+							}
+						}
+					}
+					save_scope_value_as = {
+						name = num_of_holdings_in_imminent_danger
+						value = {
+							value = scope:num_of_holdings_in_imminent_danger
+							add = 1
+						}
+					}
 				}
+
+				
+				# Look for most developed county
 				if = {
 					limit = {
 						NOT = { exists = scope:most_developed_county }
 					}
 					county = {
 						save_scope_as = most_developed_county
-					}
-					scope:root = {
-						add_gold = -1
 					}
 				}
 				else = {
@@ -49,10 +69,14 @@ anarchy_increase_control.0001 = {
 						county = {
 							save_scope_as = most_developed_county
 						}
-						scope:root = {
-							add_gold = 1
-						}
 					}
+				}
+			}
+
+			if = {
+				limit = {
+					is_capital_barony = yes
+					county.county_control < global_var:anarchy_control_threshold
 				}
 			}
 		}
@@ -81,11 +105,14 @@ anarchy_increase_control.0001 = {
 
 	option = {
 		name = anarchy_increase_control.0001.a
-		# increase control in the most developed county
+		# increase control in the most developed county with control under the threshold
+		trigger = {
+			exists = scope:most_developed_county
+		}
 
-		add_gold = {
+		remove_reserved_gold = {
 			value = scope:holding_count_in_most_developed_county
-			multiply = -10
+			multiply = 10
 		}
 
 		scope:most_developed_county = {
@@ -99,10 +126,16 @@ anarchy_increase_control.0001 = {
 
 	option = {
 		name = anarchy_increase_control.0001.b
+		# Increase control in all counties with control under the threshold which are
+		# in imminent danger of being taken over by anarchy
+
+		trigger = {
+			scope:num_of_holdings_in_imminent_danger > 0
+		}
 		
-		add_gold = {
-			value = scope:num_of_holdings
-			multiply = -10
+		remove_reserved_gold = {
+			value = scope:num_of_holdings_in_imminent_danger
+			multiply = 10
 		}
 
 		every_directly_owned_province = {
@@ -110,6 +143,12 @@ anarchy_increase_control.0001 = {
 				limit = {
 					is_capital_barony = yes
 					county.county_control < global_var:anarchy_control_threshold
+					county = {
+						NOR = {
+							has_county_modifier = anarchy_control_increase_modifier
+							has_county_modifier = anarchy_arisen_cooldown_modifier
+						}
+					}
 				}
 				county = {
 					change_county_control = 5
@@ -120,5 +159,41 @@ anarchy_increase_control.0001 = {
 				}
 			}
 		}
+	}
+
+	option = {
+		name = anarchy_increase_control.0001.c
+		# Increase control in all counties with control under the threshold
+
+		trigger = {
+			scope:num_of_holdings > 0
+		}
+
+		remove_reserved_gold = {
+			value = scope:num_of_holdings
+			multiply = 10
+		}
+
+		every_directly_owned_province = {
+			if = {
+				limit = {
+					is_capital_barony = yes
+					county.county_control < global_var:anarchy_control_threshold
+					NOT = { has_county_modifier = anarchy_control_increase_modifier }
+				}
+				county = {
+					change_county_control = 5
+					add_county_modifier = {
+						modifier = anarchy_control_increase_modifier
+						days = 900
+					}
+				}
+			}
+		}
+	}
+
+	option = {
+		name = anarchy_increase_control.0001.d
+		# Do nothing voluntarily
 	}
 }

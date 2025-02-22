@@ -125,10 +125,12 @@ anarchy_start.1111 = {
     option = {
         name = anarchy_start.1111.a
 
-        start_war = {
-            cb = reintegrate_anarchy_casus_belli
-            target = scope:leader
-            target_title = scope:selected_county
+        scope:leader = {
+            start_war = {
+                cb = reintegrate_anarchy_casus_belli
+                target = scope:original_owner
+                target_title = scope:selected_county
+            }
         }
     }
 }
@@ -167,10 +169,12 @@ anarchy_start.1121 = {
     option = {
         name = anarchy_start.1121.a
 
-        start_war = {
-            cb = reintegrate_anarchy_casus_belli
-            target = scope:leader
-            target_title = scope:selected_county
+        scope:leader = {
+            start_war = {
+                cb = reintegrate_anarchy_casus_belli
+                target = scope:original_owner
+                target_title = scope:selected_county
+            }
         }
     }
 }
@@ -296,10 +300,12 @@ anarchy_start.1211 = {
     option = {
         name = anarchy_start.1211.a
 
-        start_war = {
-            cb = reintegrate_anarchy_casus_belli
-            target = scope:leader
-            target_title = scope:selected_county
+        scope:leader = {
+            start_war = {
+                cb = reintegrate_anarchy_casus_belli
+                target = scope:original_owner
+                target_title = scope:selected_county
+            }
         }
     }
 }
@@ -342,10 +348,12 @@ anarchy_start.1221 = {
     option = {
         name = anarchy_start.1221.a
 
-        start_war = {
-            cb = reintegrate_anarchy_casus_belli
-            target = scope:leader
-            target_title = scope:selected_county
+        scope:leader = {
+            start_war = {
+                cb = reintegrate_anarchy_casus_belli
+                target = scope:original_owner
+                target_title = scope:selected_county
+            }
         }
     }
 }
@@ -503,10 +511,12 @@ anarchy_start.1311 = {
     option = {
         name = anarchy_start.1311.a
 
-        start_war = {
-            cb = reintegrate_anarchy_casus_belli
-            target = scope:leader
-            target_title = scope:selected_county
+        scope:leader = {
+            start_war = {
+                cb = reintegrate_anarchy_casus_belli
+                target = scope:original_owner
+                target_title = scope:selected_county
+            }
         }
     }
 }
@@ -559,10 +569,12 @@ anarchy_start.1321 = {
     option = {
         name = anarchy_start.1321.a
 
-        start_war = {
-            cb = reintegrate_anarchy_casus_belli
-            target = scope:leader
-            target_title = scope:selected_county
+        scope:leader = {
+            start_war = {
+                cb = reintegrate_anarchy_casus_belli
+                target = scope:original_owner
+                target_title = scope:selected_county
+            }
         }
     }
 }
